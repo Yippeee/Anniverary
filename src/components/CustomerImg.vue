@@ -4,7 +4,7 @@
     <div class="info-box">
         <!-- times and location -->
         <span class="time">2018-06-22</span>
-        <span class="location">成都</span>
+        <span class="location">成都11</span>
     </div>
 </div>
 </template>
