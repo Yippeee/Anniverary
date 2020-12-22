@@ -1,56 +1,65 @@
 .<template>
-<div class="img-wrap">
-    <img src="../assets/logo.png" class="trace-img" />
-    <div class="info-box">
-        <!-- times and location -->
-        <span class="time">2018-06-22</span>
-        <span class="location">成都11</span>
+  <div class="card" @click="cardClickFn()">
+    <div class="card__face card__face--front">
+      <!-- <img src="../assets/2018-12.jpeg" /> -->
+      <span>{{ brief }}</span>
     </div>
-</div>
+    <div class="card__face card__face--back">
+      <img :src="src" />
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-    setup(props) {
-        console.log(1)
-    }
-}
+  props: {
+      brief: String,
+      src: String,
+  },
+  setup(props, { emit }) {
+    return {
+      cardClickFn: () => emit("clickFn"),
+    };
+  },
+};
 </script>
 
 <style lang="less">
-.img-wrap {
-    display: inline-flex;
-    position: relative;
-    height: 173px;
-    width: 109px;
-    overflow: hidden;
+.card {
+  position: relative;
+  height: 173px;
+  width: 109px;
+  color: white;
+  cursor: pointer;
+  transition: 1s ease-in-out;
+  transform-style: preserve-3d;
 
-    &:hover {
-        .info-box {
-            z-index: 3;
+  &:hover {
+    transform: rotateY(0.5turn);
+  }
+  .card__face--front {
+    line-height: 173px;
+  }
 
-        }
+  .card__face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transition: 1s ease-in-out;
+    // -webkit-box-reflect: below 0 linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
     }
 
-    .trace-img {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        cursor: pointer;
-        transition: all 0.5s;
-        z-index: 2;
+    &--back {
+      transform: rotateY(0.5turn);
     }
-
-    .info-box {
-        position: absolute;
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-        background-color: white;
-        z-index: 1;
-
-    }
+  }
 }
 </style>
